@@ -1,0 +1,22 @@
+{% block content %}
+
+<form action="/update/{{employee.id}}" method="post">
+
+    {% csrf_token %}
+
+    <label>employee ID : {{employee.id}}</label>
+
+    <label >NAME:</label>
+   <input type="text" name="name" value="{{employee.name}}">
+
+    <label >Email:</label>
+    <input type="email" name="email" value="{{employee.email}}">
+
+    <label >password:</label>
+    <input type="text" name="password" value="{{employee.password}}">
+
+    <input type="submit" value="update">
+</form>
+
+
+{% endblock content %}

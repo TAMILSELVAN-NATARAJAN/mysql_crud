@@ -1,0 +1,22 @@
+{%  extends 'base/base.html' %}
+
+{% block content %}
+
+<h2>Sign UP</h2>
+
+<form  method="post">
+    {% csrf_token %}
+    {% for fields in form %}
+       <p>
+
+        {{fields.label_tag}}  <br>
+        {{fields}}
+
+        {% for error in fields.errors%}
+           <p style="color: red;">{{error}}</p>
+        {% endfor %}
+       </p>
+    {% endfor%}
+       <input type="submit" value="signup">
+</form>
+{% endblock content %}

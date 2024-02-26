@@ -1,0 +1,19 @@
+{% block content %}
+<a href="{% url 'home' %}">go back</a>
+<p>add user...</p>
+
+<form action="{% url 'adduser' %}" method="post">
+    {% csrf_token %}
+      <label >NAME:</label>
+      {{form.name}}
+
+      <label >Email:</label>
+      {{form.email}}
+
+      <label >password:</label>
+      {{form.password}}
+
+      <input type="submit" value="login">
+
+</form>
+{% endblock content %}

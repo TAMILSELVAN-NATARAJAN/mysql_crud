@@ -1,0 +1,100 @@
+{% extends 'base/base.html' %}
+{% block content %}
+
+<style>
+  .nav-container {
+    background-color: blue;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  h1 {
+    text-align: center;
+    margin-left: 10px;
+    color: aliceblue;
+  }
+
+  .user-auth{
+    display: grid;
+
+    justify-content: space-between;
+    grid-template-columns: 0.5fr 0.5fr 0.5fr;
+    gap: 10px;
+    padding: 20px;
+
+  }
+
+.user-auth a {
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    background-color: yellow;
+    /* padding: 8px; */
+    border-radius: 5px;
+  }
+  .user-auth h2{
+    background-color: aqua;
+  }
+
+  .user-not-auth a :hover {
+    background-color: white;
+    color: black;
+    scale: 1.2;
+  }
+.table-div{
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+</style>
+
+
+
+<div class="nav-container">
+  <h1>Admin Dashboard</h1>
+
+  {% if user.is_authenticated %}
+  <div class="user-auth">
+    <h2>{{user.username}}</h2>
+    <a href="{% url 'adduser'%}">Add user</a>
+    <a href="{% url 'logout' %}">logout</a>
+  </div>
+  {% else %}
+  <div class="user-not-auth">
+    <a href="{% url 'signin' %}">LOGIN</a>
+    <a href="{% url 'signup' %}">signup</a>
+  </div>
+</div>
+
+{% endif %}
+<div class="table-div">
+  <table>
+    <thead>
+      <th>ID</th>
+      <th>NAME</th>
+      <th>Email</th>
+      <th>Password</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </thead>
+    {% for employee in emp %}
+    <tr>
+      <td>{{employee.id}}</td>
+      <td>{{employee.name}}</td>
+      <td>{{employee.email}}</td>
+      <td>{{employee.password}}</td>
+      <td><a href="{% url 'edit' employee.id%}">edit</a></td>
+      <td><a href="{% url 'delete' employee.id%}">delete</a></td>
+    </tr>
+
+    {% endfor %}
+
+    </tr>
+  </table>
+</div>
+{% endblock content %}
